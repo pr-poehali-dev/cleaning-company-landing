@@ -6,9 +6,11 @@ import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -37,9 +39,66 @@ export default function Index() {
               <Icon name="Phone" size={20} />
               +7 (999) 123-45-67
             </a>
-            <button className="md:hidden">
-              <Icon name="Menu" size={24} />
-            </button>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button className="md:hidden p-2">
+                  <Icon name="Menu" size={24} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] sm:w-[350px]">
+                <div className="flex flex-col gap-6 mt-8">
+                  <div className="flex items-center gap-2 pb-4 border-b">
+                    <Icon name="Sparkles" className="text-primary" size={28} />
+                    <span className="text-xl font-bold text-primary">Чистый Взгляд</span>
+                  </div>
+                  <nav className="flex flex-col gap-4">
+                    <button 
+                      onClick={() => { scrollToSection('home'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      Главная
+                    </button>
+                    <button 
+                      onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      Услуги
+                    </button>
+                    <button 
+                      onClick={() => { scrollToSection('prices'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      Цены
+                    </button>
+                    <button 
+                      onClick={() => { scrollToSection('about'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      О компании
+                    </button>
+                    <button 
+                      onClick={() => { scrollToSection('reviews'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      Отзывы
+                    </button>
+                    <button 
+                      onClick={() => { scrollToSection('contacts'); setMobileMenuOpen(false); }} 
+                      className="text-left text-lg font-medium hover:text-primary transition-colors py-2"
+                    >
+                      Контакты
+                    </button>
+                  </nav>
+                  <div className="pt-4 border-t">
+                    <a href="tel:+79991234567" className="flex items-center gap-3 text-primary font-semibold text-lg">
+                      <Icon name="Phone" size={22} />
+                      +7 (999) 123-45-67
+                    </a>
+                    <p className="text-sm text-muted-foreground mt-2">Ежедневно с 8:00 до 22:00</p>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </nav>
         </div>
       </header>
